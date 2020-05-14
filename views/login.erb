@@ -1,0 +1,12 @@
+<% if session[:message] %>
+  <h3> <%= session[:message] %> </h3>
+  <% session[:message] = nil %>
+<% end %>
+
+<form action="/login" method='post'>
+  <div style="text-align:center; padding-top: 30px;">
+    Username: <input type='text' name='username'></input><br><br>
+    Password: <input type='password' name='password'></input><br><br>
+    <input type="submit" value="Login">
+  </div>
+</form> 

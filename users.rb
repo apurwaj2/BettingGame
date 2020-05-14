@@ -1,0 +1,53 @@
+
+require 'dm-core'
+require 'dm-migrations'
+
+enable :sessions
+
+DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/users.db")
+
+class User
+  include DataMapper::Resource
+  property :id, Serial
+  property :username, String
+  property :password, String
+  property :totalWins, Integer
+  property :totalLoss, Integer
+  property :totalProfit, Integer
+end
+
+DataMapper.finalize
+
+get '/users' do
+  if session[:name] != nil
+    user = User.first(session[:name])
+    @totalWinsdb = user.totalWins
+    @totalLossdb = user.totalLoss
+    @totalProfitdb = user.totalProfit
+    session[:win] = 0
+    session[:loss] = 0
+    session[:profit] = 0
+    @winSess = session[:win]
+    @lossSess = session[:loss]
+    @profitSess = session[:profit]
+    erb :bet
+  else
+    redirect '/'
+  end
+end
+
+get '/bet' do
+  if session[:name] != nil
+    user = User.first(session[:name])
+    @totalWinsdb = user.totalWins
+    @totalLossdb = user.totalLoss
+    @totalProfitdb = user.totalProfit
+    @winSess = session[:win]
+    @lossSess = session[:loss]
+    @profitSess = session[:profit]
+    erb :bet
+  else
+   redirect '/' 
+  end
+end
+

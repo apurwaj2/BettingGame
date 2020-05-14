@@ -1,0 +1,26 @@
+h1 {
+    justify-content: center;
+    text-align: center;
+    color:#000000
+}
+h4 {
+    justify-content: center;
+    text-align: center;
+}
+html {background-color: #ccc;}
+body {
+    width:700px;
+    height:700px;
+    background-color:#dddcd9;
+    margin:2em auto 2em;
+    padding:25px;
+    position:relative;
+}
+input[type="button"], input[type="submit"] { 
+    color:#000000; 
+    width:100px;
+    height:30px;
+    background-color:#d3d3d3; 
+    border:1px solid; 
+    border-color: #696 #363 #363 #696; 
+} 
