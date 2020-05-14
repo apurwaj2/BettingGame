@@ -14,10 +14,9 @@ get '/' do
 end
 
 post '/login' do
-  user = User.first(params[:username])
-  pass = user.password
-  if pass != nil && 
-    params[:password] == pass
+  user = User.first(username: params[:username])
+  if user != nil  && user.password != nil && 
+      params[:password] == user.password
       session[:name] = params[:username]
       redirect to '/users'
   else
