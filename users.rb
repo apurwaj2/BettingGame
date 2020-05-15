@@ -4,7 +4,7 @@ require 'dm-migrations'
 
 enable :sessions
 
-DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/users.db")
+#DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/users.db")
 
 class User
   include DataMapper::Resource
