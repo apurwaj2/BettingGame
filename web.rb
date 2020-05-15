@@ -1,7 +1,9 @@
 require 'sinatra'
 require './users'
 
-enable :sessions
+configure :production do
+  DataMapper.setup(:default, ENV['DATABASE_URL'])
+end
 
 def save_session(para, money)
   count = (session[para] || 0).to_i
