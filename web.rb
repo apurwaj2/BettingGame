@@ -48,9 +48,9 @@ post '/logout' do
   user.update(totalWins: session[:win] + user.totalWins)
   user.update(totalLoss: session[:loss] + user.totalLoss)
   user.update(totalProfit: session[:profit] + user.totalProfit)
+  session[:message] = "#{session[:name]} has successfully logged out"
   session[:login] = nil
   session[:name] = nil
-  session[:message] = "You have successfully logged out"
   redirect '/'
 end
 

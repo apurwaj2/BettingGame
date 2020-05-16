@@ -20,7 +20,7 @@ DataMapper.finalize
 
 get '/users' do
   if session[:name] != nil
-    user = User.first(session[:name])
+    user = User.first(username: session[:name])
     @totalWinsdb = user.totalWins
     @totalLossdb = user.totalLoss
     @totalProfitdb = user.totalProfit
@@ -38,7 +38,7 @@ end
 
 get '/bet' do
   if session[:name] != nil
-    user = User.first(session[:name])
+    user = User.first(username: session[:name])
     @totalWinsdb = user.totalWins
     @totalLossdb = user.totalLoss
     @totalProfitdb = user.totalProfit
