@@ -34,10 +34,16 @@ post '/bet' do
   if number == roll
     save_session(:win, 10*money)
     save_session(:profit, 9*money)
+    save_session(:totalWin, 10*money)
+    save_session(:totalProfit,9*money)
+   # session[:totalWin] = session[:totalWin] + session[:win]
+   # session[:totalProfit] = session[:totalProfit] + session[:profit]
     session[:message] = "The dice landed on #{roll}, you chose #{number} and you won #{10*money} dollars"
   else
     save_session(:loss, money)
     save_session(:win, -1*money)
+    save_session(:totalWin, -1*money)
+    save_session(:totalLoss, money)
     session[:message] = "The dice landed on #{roll}, you chose #{number} and you lost #{money} dollars"
   end
   redirect '/bet'
@@ -45,9 +51,9 @@ end
 
 post '/logout' do
   user = User.first(username: session[:name])
-  user.update(totalWins: session[:win] + user.totalWins)
-  user.update(totalLoss: session[:loss] + user.totalLoss)
-  user.update(totalProfit: session[:profit] + user.totalProfit)
+  user.update(totalWins: session[:totalWin])
+  user.update(totalLoss: session[:totalLoss])
+  user.update(totalProfit: session[:totalProfit])
   session[:message] = "#{session[:name]} has successfully logged out"
   session[:login] = nil
   session[:name] = nil

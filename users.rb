@@ -4,7 +4,7 @@ require 'dm-migrations'
 
 enable :sessions
 
-#DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/users.db")
+DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/users.db")
 
 class User
   include DataMapper::Resource
@@ -24,6 +24,9 @@ get '/users' do
     @totalWinsdb = user.totalWins
     @totalLossdb = user.totalLoss
     @totalProfitdb = user.totalProfit
+    session[:totalWin] = user.totalWins
+    session[:totalLoss] = user.totalLoss
+    session[:totalProfit] = user.totalProfit
     session[:win] = 0
     session[:loss] = 0
     session[:profit] = 0
@@ -39,9 +42,9 @@ end
 get '/bet' do
   if session[:name] != nil
     user = User.first(username: session[:name])
-    @totalWinsdb = user.totalWins
-    @totalLossdb = user.totalLoss
-    @totalProfitdb = user.totalProfit
+    @totalWinsdb = session[:totalWin]
+    @totalLossdb = session[:totalLoss]
+    @totalProfitdb = session[:totalProfit]
     @winSess = session[:win]
     @lossSess = session[:loss]
     @profitSess = session[:profit]
